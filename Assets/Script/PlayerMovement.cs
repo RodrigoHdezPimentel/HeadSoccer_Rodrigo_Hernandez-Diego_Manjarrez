@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     public bool rotation;
     public float jumpForce;
     private bool isGrounded;
+    private Animator _animator;
+
 
 
     // Start is called before the first frame update
@@ -19,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -30,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
             //_dir = new Vector2(1, 0);
             _dir.x = 1;
             _spriteRenderer.flipX = (!rotation);
+            _animator.SetBool("isWalking", true);
 
         }
         else if (Input.GetKey(left))
@@ -37,13 +42,18 @@ public class PlayerMovement : MonoBehaviour
             //_dir = new Vector2(-1, 0);
             _dir.x = -1;
             _spriteRenderer.flipX = (rotation);
+            _animator.SetBool("isWalking", true);
 
+        }
+        else
+        {
+            _animator.SetBool("isWalking", false);
         }
         if (Input.GetKeyDown(jump) && isGrounded)
         {
             _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
-        
+            _animator.SetBool("isJumping", true);
         }
     }
     private void FixedUpdate()
@@ -58,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+            _animator.SetBool("isJumping", false);
         }
     }
     void OnCollisionExit2D(Collision2D collision)
@@ -66,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = false;
+            _animator.SetBool("isJumping", false);
         }
     }
 }

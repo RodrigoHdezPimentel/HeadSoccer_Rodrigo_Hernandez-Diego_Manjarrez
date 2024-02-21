@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0be5f9ce9a26e2e409355d75cb08e9be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTime: 30
+  targetTime: 19
   timer: {fileID: 1849769276}
   winner: {fileID: 1558808903}
 --- !u!4 &1223118
