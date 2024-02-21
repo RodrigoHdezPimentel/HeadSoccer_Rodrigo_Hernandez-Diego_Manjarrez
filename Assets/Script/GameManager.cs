@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private int[] puntos;
+    private int[] points;
     public TextMeshProUGUI pointsScore;
     public static GameManager Instance;
 
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
     {
         if (Instance == null)
         {
+            //GameManager instance
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
@@ -22,10 +24,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        points = new int[2];
+    }
+
     public void SumarPunto(int player)
     {
         //Sumar puntos
-        puntos[player]++;
-        pointsScore.text = puntos[1] + " - " + puntos[0];
+        points[player]++;
+        pointsScore.text = points[1] + " - " + points[0];
     }
 }

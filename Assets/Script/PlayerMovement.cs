@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
             _spriteRenderer.flipX = (rotation);
 
         }
-        else if (Input.GetKeyDown(jump) && isGrounded)
+        if (Input.GetKeyDown(jump) && isGrounded)
         {
             _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
