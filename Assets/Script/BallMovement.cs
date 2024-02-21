@@ -26,5 +26,6 @@ public class BallMovement : MonoBehaviour
             // Aplicar la fuerza en la dirección opuesta
             _rb.AddForce(direccionOpuesta * velocidad, ForceMode2D.Impulse);
         }
+
     }
 }

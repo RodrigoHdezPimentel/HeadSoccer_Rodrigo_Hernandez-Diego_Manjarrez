@@ -27,19 +27,20 @@ public class PlayerMovement : MonoBehaviour
         _dir = Vector2.zero;
         if (Input.GetKey(right))
         {
-            _dir = new Vector2(1, 0);
-            _spriteRenderer.flipX = (rotation == false);
+            //_dir = new Vector2(1, 0);
+            _dir.x = 1;
+            _spriteRenderer.flipX = (!rotation);
 
         }
         else if (Input.GetKey(left))
         {
-            _dir = new Vector2(-1, 0);
-            _spriteRenderer.flipX = (rotation == true);
+            //_dir = new Vector2(-1, 0);
+            _dir.x = -1;
+            _spriteRenderer.flipX = (rotation);
 
         }
         else if (Input.GetKeyDown(jump) && isGrounded)
         {
-            Debug.Log("Jumping!");
             _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
         
@@ -47,7 +48,9 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        _rb.velocity = _dir * speed;
+        Vector2 newVel = _dir * speed;
+        newVel.y = _rb.velocity.y;
+        _rb.velocity = newVel;
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
