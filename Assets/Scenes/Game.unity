@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0be5f9ce9a26e2e409355d75cb08e9be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTime: 18
+  targetTime: 30
   timer: {fileID: 1849769276}
   winner: {fileID: 1558808903}
 --- !u!4 &1223118
@@ -6590,8 +6590,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af6c1d6ac89ee9a4b9cd7108b5ef06ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsScore: {fileID: 785789623}
-  panel: {fileID: 0}
 --- !u!1 &1558808901
 GameObject:
   m_ObjectHideFlags: 0
@@ -7452,6 +7450,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   confeti: {fileID: 2116656843}
   numPorteria: 1
+  pointsScore: {fileID: 785789623}
 --- !u!60 &2029639424
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -7638,6 +7637,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   confeti: {fileID: 1491646873}
   numPorteria: 0
+  pointsScore: {fileID: 785789623}
 --- !u!60 &2044785832
 PolygonCollider2D:
   m_ObjectHideFlags: 0

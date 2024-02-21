@@ -1,22 +1,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GoalTrigger : MonoBehaviour
 {
     public GameObject confeti;
     public int numPorteria;
+    public TextMeshProUGUI pointsScore;
+    private int[] points;
     // Start is called before the first frame update
     void Start()
     {
         confeti.SetActive(false);
+        pointsScore.text = "0 - 0";
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        points = new int[2];
     }
     void OnCollisionEnter2D(Collision2D collision)
     {   
@@ -26,7 +30,8 @@ public class GoalTrigger : MonoBehaviour
             StartCoroutine(Confeti());
             Debug.Log("goooooooaaaaaaaaal");
             collision.gameObject.SetActive(false);
-            GameManager.Instance.SumarPunto(numPorteria);
+            BallSpawner.objetsAlive.Remove(collision.gameObject);
+            SumarPunto(numPorteria);
         }
     }
     IEnumerator Confeti()
@@ -34,5 +39,12 @@ public class GoalTrigger : MonoBehaviour
         confeti.SetActive(true);        
         yield return new WaitForSeconds(3);
         confeti.SetActive(false);
+    }
+    public void SumarPunto(int player)
+    {
+        points = GameManager.Instance.getPoints();
+        //Sumar puntos
+        points[player]++;
+        pointsScore.text = points[1] + " - " + points[0];
     }
 }
