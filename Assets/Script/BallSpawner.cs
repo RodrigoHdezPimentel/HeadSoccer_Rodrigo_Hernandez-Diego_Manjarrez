@@ -29,7 +29,7 @@ public class BallSpawner : MonoBehaviour
             obj.transform.position = transform.position; 
         }
         //if there're less than 15sec and it's a draw, create a ball
-        if (int.Parse(timer.text) <= 15 && GameManager.Instance.getWinner() == "Empate")
+        if (int.Parse(timer.text) <= 15 && GameManager.Instance.getWinner() == "Empate" && objetsAlive.Count < 2)
         {
             GameObject obj2 = pool.GetInactiveGameObject();
             obj.SetActive(true);
