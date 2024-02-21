@@ -20,7 +20,5 @@ public class BallSpawner : MonoBehaviour
             obj.SetActive(true);
             obj.transform.position = transform.position;
         }
-
-    }
-        
+    }   
 }

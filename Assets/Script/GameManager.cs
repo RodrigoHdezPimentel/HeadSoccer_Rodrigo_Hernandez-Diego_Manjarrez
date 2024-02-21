@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private int[] puntos;
-    public TextMeshProUGUI[] pointsScore;
+    public TextMeshProUGUI pointsScore;
     public static GameManager Instance;
 
     private void Awake()
@@ -21,10 +21,11 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     public void SumarPunto(int player)
     {
         //Sumar puntos
         puntos[player]++;
-        pointsScore[player].text = "Puntos: " + puntos;
+        pointsScore.text = puntos[1] + " - " + puntos[0];
     }
 }
