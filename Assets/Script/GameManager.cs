@@ -27,12 +27,30 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        panel.SetActive(false);
+     
         points = new int[2];
     }
     public void ShowPanel()
     {
         panel.SetActive(true);
+    }
+    public void HidePanel()
+    {
+        panel.SetActive(false);
+    }
+    public string getWinner()
+    {
+        if (points[0] < points[1])
+        {
+            return "Ganador\nNaranja";
+        }else if (points[0] > points[1])
+        {
+            return "Ganador\nVerde";
+        }
+        else
+        {
+            return "Empate";
+        }
     }
 
     public void SumarPunto(int player)

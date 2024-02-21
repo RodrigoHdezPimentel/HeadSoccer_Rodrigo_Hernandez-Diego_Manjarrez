@@ -32,7 +32,7 @@ public class GoalTrigger : MonoBehaviour
     IEnumerator Confeti()
     {
         confeti.SetActive(true);        
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
         confeti.SetActive(false);
     }
 }
