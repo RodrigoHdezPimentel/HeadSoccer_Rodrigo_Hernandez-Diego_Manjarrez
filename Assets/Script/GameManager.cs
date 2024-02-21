@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     private int[] points;
     public TextMeshProUGUI pointsScore;
     public static GameManager Instance;
+    public GameObject panel;
 
     private void Awake()
     {
@@ -26,7 +27,12 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        panel.SetActive(false);
         points = new int[2];
+    }
+    public void ShowPanel()
+    {
+        panel.SetActive(true);
     }
 
     public void SumarPunto(int player)
