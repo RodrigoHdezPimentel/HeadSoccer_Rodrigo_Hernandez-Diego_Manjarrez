@@ -6,7 +6,7 @@ public class BallMovement : MonoBehaviour
 {
 
     private Rigidbody2D _rb;
-    public float velocidad; // Ajusta la velocidad según tus necesidades
+    public float velocidad;
 
     void Start()
     {
