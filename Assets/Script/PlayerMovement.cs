@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,24 +15,20 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce;
     private bool isGrounded;
     private Animator _animator;
-    public GameObject joystick;
-
-
+    public List<Button> listaDeBotones;
 
     // Start is called before the first frame update
     void Start()
     {
-
         _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        joystick.SetActive(false);
+#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
         _dir = Vector2.zero;
         if (Input.GetKey(right))
         {
@@ -59,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = false;
             _animator.SetBool("isJumping", true);
         }
+#endif
     }
     private void FixedUpdate()
     {
