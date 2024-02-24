@@ -72,10 +72,10 @@ public class PlayerMovement : MonoBehaviour
                     else if(touch.position.x < Screen.width / 2 && touch.position.x > Screen.width / 4)
                     {
                         _dir.x = 1;
-                        _spriteRenderer.flipX = (rotation);
+                        _spriteRenderer.flipX = (!rotation);
                         _animator.SetBool("isWalking", true);
                     }
-                    if(touch.position.x > Screen.width / 2)
+                    if(touch.position.x > Screen.width / 2 && isGrounded)
                     {
                         _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                         isGrounded = false;
