@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        points = new int[2];
     }
    
     public string getWinner()

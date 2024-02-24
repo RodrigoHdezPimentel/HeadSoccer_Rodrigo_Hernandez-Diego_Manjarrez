@@ -13,8 +13,10 @@ public class GoalTrigger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        int[] puntos = { 0, 0 };
         confeti.SetActive(false);
         pointsScore.text = "0 - 0";
+        GameManager.Instance.setPoints(puntos);
     }
 
     // Update is called once per frame
