@@ -56,6 +56,41 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = false;
             _animator.SetBool("isJumping", true);
         }
+#elif UNITY_ANDROID
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                    if(touch.position.x < Screen.width / 4)
+                    {
+                        _dir.x = -1;
+                        _spriteRenderer.flipX = (rotation);
+                        _animator.SetBool("isWalking", true);
+                    }
+                    else if(touch.position.x < Screen.width / 2 && touch.position.x > Screen.width / 4)
+                    {
+                        _dir.x = 1;
+                        _spriteRenderer.flipX = (rotation);
+                        _animator.SetBool("isWalking", true);
+                    }
+                    if(touch.position.x > Screen.width / 2)
+                    {
+                        _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                        isGrounded = false;
+                        _animator.SetBool("isJumping", true);
+                    }
+
+                    break;
+                
+                case TouchPhase.Ended:
+                    _dir.x = 0;
+                    _spriteRenderer.flipX = (rotation);
+                    _animator.SetBool("isWalking", false);
+                    break;
+            }
+        }
 #endif
     }
     private void FixedUpdate()
