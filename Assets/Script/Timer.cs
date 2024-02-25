@@ -12,24 +12,29 @@ public class Timer : MonoBehaviour
 
     void Start()
     {
-         timer.text = targetTime.ToString();
+        //Resetea a valores deseados
+        timer.text = targetTime.ToString();
         timer.color = Color.white;
         StartCoroutine(DecreaseTime());
 
     }
     private void Update()
     {
+        //Comprueba el tiempo restante
         if (targetTime == 0)
         {
             winner.text = GameManager.Instance.getWinner();
         }
+        //Si quedan menos de 15 sec, el contador se vuelve rojo
         if(int.Parse(timer.text) <= 15)
         {
             timer.color = Color.red;
         }
+        GameManager.Instance.setTime(targetTime);
     }
     IEnumerator DecreaseTime()
     {
+        //Contador
         while (targetTime > 0)
         {
             targetTime -= 1;
@@ -37,5 +42,4 @@ public class Timer : MonoBehaviour
             timer.text = targetTime.ToString();
         }
     }
-
 }

@@ -28,8 +28,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Comprueba si el compilador es windows
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
         _dir = Vector2.zero;
+        //Movimiento a la derecha
         if (Input.GetKey(right))
         {
             //_dir = new Vector2(1, 0);
@@ -38,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("isWalking", true);
 
         }
+        //Movimiento a la izq
         else if (Input.GetKey(left))
         {
             //_dir = new Vector2(-1, 0);
@@ -50,31 +53,37 @@ public class PlayerMovement : MonoBehaviour
         {
             _animator.SetBool("isWalking", false);
         }
+        //Se conprueba que el personaje toca el suelo para saltar
         if (Input.GetKeyDown(jump) && isGrounded)
         {
             _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
             _animator.SetBool("isJumping", true);
         }
+        //Comprueba que el compilador es android
 #elif UNITY_ANDROID
         if (Input.touchCount > 0)
         {
+            //Detecta el primer click y evalua su posicion
             Touch touch = Input.GetTouch(0);
             switch (touch.phase)
             {
                 case TouchPhase.Began:
+                    //Si es en el primer cuarto de la pantalla, el personaje se desplaza a la izq
                     if(touch.position.x < Screen.width / 4)
                     {
                         _dir.x = -1;
                         _spriteRenderer.flipX = (rotation);
                         _animator.SetBool("isWalking", true);
                     }
+                    //Y si es en el segundo cuarto, a la derecha
                     else if(touch.position.x < Screen.width / 2 && touch.position.x > Screen.width / 4)
                     {
                         _dir.x = 1;
                         _spriteRenderer.flipX = (!rotation);
                         _animator.SetBool("isWalking", true);
                     }
+                    //Si se toca la mitad derecha de la pantalla, salta
                     if(touch.position.x > Screen.width / 2 && isGrounded)
                     {
                         _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -83,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
                     }
 
                     break;
-                
+                //Si se deja de tocar la pantalla, el personaje para
                 case TouchPhase.Ended:
                     _dir.x = 0;
                     _spriteRenderer.flipX = (rotation);
@@ -95,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        //Guarda una velocidad concreta para realizar el salto
         Vector2 newVel = _dir * speed;
         newVel.y = _rb.velocity.y;
         _rb.velocity = newVel;

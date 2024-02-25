@@ -6,17 +6,18 @@ using UnityEngine;
 public class Panel : MonoBehaviour
 {
     public GameObject panel;
-    public TextMeshProUGUI timer;
     // Start is called before the first frame update
     void Start()
     {
+        //Oculta el panel
         panel.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(timer.text == "0")
+        //Si el tiempo se ha acabado, aparece el contador
+        if(GameManager.Instance.getTime() == 0)
         {
             panel.SetActive(true);
         }

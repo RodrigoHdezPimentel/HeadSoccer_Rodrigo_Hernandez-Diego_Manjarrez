@@ -8,9 +8,11 @@ public class GameManager : MonoBehaviour
 {
     private int[] points;
     public static GameManager Instance;
+    private float time;
 
     private void Awake()
     {
+        //Crea una unica instancia del GameManager (porque es singleton)
         if (Instance == null)
         {
             //GameManager instance
@@ -21,12 +23,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    void Start()
-    {
-    }
-   
+    }   
+    //Devuelve el ganador en funcion de los puntos
     public string getWinner()
     {
         if (points[0] < points[1])
@@ -41,14 +39,26 @@ public class GameManager : MonoBehaviour
             return "Empate";
         }
     }
+    //Actualiza el contador
     public void setPoints(int[] points)
     {
         this.points = points;
 
     }
+    //Devuleve el contadot
     public int[] getPoints()
     {
         return points;
+    }
+    //Actualiza el tiempo que queda
+    public void setTime(float time)
+    {
+        this.time = time;
+    }
+    //Devuelve el tiempo que queda
+    public float getTime()
+    {
+        return time;
     }
 
 }

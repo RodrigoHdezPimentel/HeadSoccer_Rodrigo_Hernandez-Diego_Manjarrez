@@ -24,6 +24,7 @@ public class aiPlayer : MonoBehaviour
     {
         try
         {
+            //Busca un objeto, en este caso es la pelota, para perseguirlo
             target = GameObject.FindGameObjectWithTag("goal").GetComponent<Transform>();
         }
         catch { }
@@ -37,12 +38,15 @@ public class aiPlayer : MonoBehaviour
             //Move the object Vector2.MoveTowards(from, to, speed);
             if (isGrounded)
             {
+                //Se actualiza su posicion para seguir a la pelota
                 transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
             }
             else
             {
+                //si la pelota esta en el aire, deja un margen de distancia
                 transform.position = Vector2.MoveTowards(transform.position, new Vector2(target.position.x + 5, target.position.y), speed * Time.deltaTime);
             }
+            //Giro el spriteRenderer en funcion a la direccion que vaya
             if (transform.position.x < target.position.x)
             {
                 _spriteRenderer.flipX = (!rotation);

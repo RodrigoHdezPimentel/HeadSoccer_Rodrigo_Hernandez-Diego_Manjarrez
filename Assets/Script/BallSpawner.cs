@@ -21,6 +21,7 @@ public class BallSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //only generate one ball unless there is less than 15sec and it is a draw
         GameObject obj = pool.GetInactiveGameObject();
         if (obj && (objetsAlive.Count == 0 || (int.Parse(timer.text) <= 15 && GameManager.Instance.getWinner() == "Empate")))
         {
