@@ -8,11 +8,13 @@ public class PlayerMovement : MonoBehaviour
 {
     public KeyCode left, right, jump;
     public float speed;
+    private float lastSpeed;
     private Rigidbody2D _rb;
     private Vector2 _dir;
     private SpriteRenderer _spriteRenderer;
     public bool rotation;
     public float jumpForce;
+    private float lastJumpForce;
     private bool isGrounded;
     private Animator _animator;
     public List<Button> listaDeBotones;
@@ -20,7 +22,11 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        lastJumpForce = jumpForce;
+        lastSpeed = speed;
         _rb = GetComponent<Rigidbody2D>();
+        _rb.gravityScale = 1.5f;
+
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
     }
@@ -28,6 +34,12 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.Instance.getTime() < 15) 
+        {
+            lastSpeed = speed * 3f;
+            lastJumpForce = jumpForce * 3f;
+            _rb.gravityScale = 5f;
+        }
         //Comprueba si el compilador es windows
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
         _dir = Vector2.zero;
@@ -56,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
         //Se conprueba que el personaje toca el suelo para saltar
         if (Input.GetKeyDown(jump) && isGrounded)
         {
-            _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            _rb.AddForce(Vector2.up * lastJumpForce, ForceMode2D.Impulse);
             isGrounded = false;
             _animator.SetBool("isJumping", true);
         }
@@ -86,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
                     //Si se toca la mitad derecha de la pantalla, salta
                     if(touch.position.x > Screen.width / 2 && isGrounded)
                     {
-                        _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                        _rb.AddForce(Vector2.up * lastJumpForce, ForceMode2D.Impulse);
                         isGrounded = false;
                         _animator.SetBool("isJumping", true);
                     }
@@ -105,7 +117,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         //Guarda una velocidad concreta para realizar el salto
-        Vector2 newVel = _dir * speed;
+        Vector2 newVel = _dir * lastSpeed;
         newVel.y = _rb.velocity.y;
         _rb.velocity = newVel;
     }

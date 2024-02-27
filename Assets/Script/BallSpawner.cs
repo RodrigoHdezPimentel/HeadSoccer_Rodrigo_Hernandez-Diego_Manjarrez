@@ -9,7 +9,6 @@ public class BallSpawner : MonoBehaviour
 {
     public GameObject objectToSpawn;
     public GameObjectPool pool;
-    public TextMeshProUGUI timer;
     public static List<GameObject> objetsAlive;
 
     // Start is called before the first frame update
@@ -23,14 +22,14 @@ public class BallSpawner : MonoBehaviour
     {
         //only generate one ball unless there is less than 15sec and it is a draw
         GameObject obj = pool.GetInactiveGameObject();
-        if (obj && (objetsAlive.Count == 0 || (int.Parse(timer.text) <= 15 && GameManager.Instance.getWinner() == "Empate")))
+        if (obj && (objetsAlive.Count == 0 || (GameManager.Instance.getTime() <= 15 && GameManager.Instance.getWinner() == "Empate")))
         {
             obj.SetActive(true);
             objetsAlive.Add(obj);
             obj.transform.position = transform.position; 
         }
         //if there're less than 15sec and it's a draw, create a ball
-        if (int.Parse(timer.text) <= 15 && GameManager.Instance.getWinner() == "Empate" && objetsAlive.Count < 2)
+        if (GameManager.Instance.getTime() <= 15 && GameManager.Instance.getWinner() == "Empate" && objetsAlive.Count < 2)
         {
             GameObject obj2 = pool.GetInactiveGameObject();
             obj.SetActive(true);

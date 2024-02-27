@@ -1279,7 +1279,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToSpawn: {fileID: 2660271435842432021, guid: 318046ca48e07eb41ab7177b1168e69d, type: 3}
   pool: {fileID: 89448144}
-  timer: {fileID: 1849769276}
 --- !u!1 &785789621
 GameObject:
   m_ObjectHideFlags: 0
@@ -7589,7 +7588,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   rotation: 0
-  jumpForce: 7
 --- !u!1 &2029639419
 GameObject:
   m_ObjectHideFlags: 0
